@@ -1,1 +1,1 @@
-# Alx AirBnB clone projec
+# Alx AirBnB clone project
