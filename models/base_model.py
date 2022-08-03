@@ -5,12 +5,9 @@ from datetime import datetime
 
 
 class BaseModel:
-    """BaseModel class"""
-
+    """BaseModel Class"""
     def __init__(self, *args, **kwargs):
-        """Initilize a new BaseModel."""
-
-
+        """__init__ magic method"""
         tform = "%Y-%m-%dT%H:%M:%S.%f"
         self.id = str(uuid4())
         self.created_at = datetime.today()
@@ -22,19 +19,19 @@ class BaseModel:
                 else:
                     self.__dict__[k] = v
 
-        def save(self):
-            """Save method."""
-            self.update_at = datetime.today()
+    def save(self):
+        """save method"""
+        self.updated_at = datetime.today()
 
-        def to_dict(self):
-            """to_dict method."""
-            rdict = self.__dict__.copy()
-            tdict["created_at"] = self.created_at.isoformat()
-            rdict["updated-at"] = self.updated_at.isoformat()
-            rdict["__class__"} = self.__class__.__name__
-            return rdict
+    def to_dict(self):
+        """to_dict method"""
+        rdict = self.__dict__.copy()
+        rdict["created_at"] = self.created_at.isoformat()
+        rdict["updated_at"] = self.updated_at.isoformat()
+        rdict["__class__"] = self.__class__.__name__
+        return rdict
 
-        def __str__(self):
-            """Return the print/str representation of the BaseModel instance."""
-            classname = self.__class__.__name__
-            return "[{}] ({}) {}".format(classname, self.id, self.__dict__)
+    def __str__(self):
+        """__str__ magic method"""
+        clname = self.__class__.__name__
+        return "[{}] ({}) {}".format(clname, self.id, self.__dict__)
