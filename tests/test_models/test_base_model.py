@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Defines unittests for models/base_model.py."""
 import unittest
 from datetime import datetime
@@ -42,15 +43,6 @@ class TestBaseModel_instantiation(unittest.TestCase):
         self.assertIn("'id': '123456'", bstr)
         self.assertIn("'created_at': datetime.datetime(1, 1, 1, 0, 0)", bstr)
         self.assertIn("'updated_at': datetime.datetime(1, 1, 1, 0, 0)", bstr)
-        
-    def test_instantiation_with_kwargs(self):
-        """instantiation with kwargs test method"""
-        bm1 = BaseModel(id="345")
-        self.assertEqual(bm1.id, "345")
-        bm1 = BaseModel(updated_at=datetime.min)
-        self.assertEqual(bm1.updated_at, datetime.datetime(1, 1, 1, 0, 0))
-        bm1 = BaseModel(created_at=datetime.min)
-        self.assertEqual(bm1.created_at, datetime.datetime(1, 1, 1, 0, 0))
 
 class TestBaseModel_save(unittest.TestCase):
     """Unittests for testing save method of the BaseModel class."""
