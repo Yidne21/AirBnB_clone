@@ -3,8 +3,6 @@
 import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
-from models import storage
-
 
 def parse(arg):
     return tuple(arg.split())
@@ -78,6 +76,7 @@ class HBNBCommand(cmd.Cmd):
         """Deletes instance based on class name and id updating JSON file"""
         arg_tup = parse(arg)
         classes = ["BaseModel"]
+        objdict = FileStorage()._FileStorage__objects
         if len(arg_tup) == 0:
             print("** class name missing **")
         elif arg_tup[0] not in classes:
@@ -88,7 +87,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found**")
         else:
             del objdict["{}.{}".format(arg_tup[0], arg_tup[1])]
-            storage().save()
+            FileStorage().save()
 
     def help_destroy(self):
         """Display info about destroy command"""
