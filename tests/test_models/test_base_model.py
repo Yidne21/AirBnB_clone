@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines unittests for models/base_model.py."""
 import unittest
+import models
 from datetime import datetime
 from models.base_model import BaseModel
 
@@ -8,29 +9,36 @@ from models.base_model import BaseModel
 class TestBaseModel_instantiation(unittest.TestCase):
     """Unittests for testing instantiation of the BaseModel class."""
     def test_no_args_instantiates(self):
-        bm = BaseModel()
-        self.assertEqual(BaseModel, type(bm))
+        self.assertEqual(BaseModel, type(BaseModel()))
+       
+    
+    def test_new_instance_stored_in_objects(self):
+        self.assertIn(BaseModel(), models.storage.all().values())
+        
     def test_id_is_public_str(self):
-        bm = BaseModel()
-        self.assertEqual(str, type(bm.id))
+        self.assertEqual(str, type(BaseModel().id))
+        
     def test_created_at_is_public_datetime(self):
-        bm = BaseModel()
-        self.assertEqual(datetime, type(bm.created_at))
+        self.assertEqual(str, type(BaseModel().id))
+        
     def test_updated_at_is_public_datetime(self):
-        bm = BaseModel()
-        self.assertEqual(datetime, type(bm.updated_at))
+        self.assertEqual(str, type(BaseModel().id))
+        
     def test_two_models_unique_ids(self):
         bm1 = BaseModel()
         bm2 = BaseModel()
         self.assertNotEqual(bm1.id, bm2.id)
+        
     def test_two_models_different_created_at(self):
         bm1 = BaseModel()
         bm2 = BaseModel()
         self.assertLess(bm1.created_at, bm2.created_at)
+        
     def test_two_models_different_updated_at(self):
         bm1 = BaseModel()
         bm2 = BaseModel()
         self.assertLess(bm1.updated_at, bm2.updated_at)
+        
     def test_str_representation(self):
         tuuid = "123456"
         bm1 = BaseModel()
@@ -51,6 +59,7 @@ class TestBaseModel_save(unittest.TestCase):
         first_updated_at = bm.updated_at
         bm.save()
         self.assertLess(first_updated_at, bm.updated_at)
+        
     def test_two_saves(self):
         bm = BaseModel()
         first_updated_at = bm.updated_at
@@ -59,6 +68,7 @@ class TestBaseModel_save(unittest.TestCase):
         self.assertLess(first_updated_at, second_updated_at)
         bm.save()
         self.assertLess(second_updated_at, bm.updated_at)
+        
     def test_save_with_arg(self):
         bm = BaseModel()
         with self.assertRaises(TypeError):
