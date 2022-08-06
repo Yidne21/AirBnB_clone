@@ -3,6 +3,7 @@
 import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+from models import storage
 
 
 def parse(arg):
@@ -87,7 +88,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found**")
         else:
             del objdict["{}.{}".format(arg_tup[0], arg_tup[1])]
-            FileStorage().save()
+            storage().save()
 
     def help_destroy(self):
         """Display info about destroy command"""
