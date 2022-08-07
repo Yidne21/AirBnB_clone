@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """Defines the Place class."""
-import models
 from models.base_model import BaseModel
 
 
@@ -18,11 +17,3 @@ class Place(BaseModel):
     latitude = 0.0
     longitude = 0.0
     amenity_ids = []
-
-    def __init__(self, *args, **kwargs):
-        """Initialize a new Place.
-        Args:
-            *args (any): Unused.
-            **kwargs (dict): Key/value pairs of attributes.
-        """
-        super().__init__(**kwargs)
