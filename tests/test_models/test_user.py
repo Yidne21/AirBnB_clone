@@ -68,6 +68,7 @@ class TestUser_instantiation(unittest.TestCase):
         self.assertEqual(us.created_at, dt)
         self.assertEqual(us.updated_at, dt)
 
+
 class TestUser_save(unittest.TestCase):
     """Unittests for testing save method of the  class."""
 
@@ -115,8 +116,10 @@ class TestUser_save(unittest.TestCase):
         with open("file.json", "r") as f:
             self.assertIn(usid, f.read())
 
+
 class TestUser_to_dict(unittest.TestCase):
     """Unittests for testing to_dict method of the User class."""
+
     def test_to_dict_type(self):
         self.assertTrue(dict, type(User().to_dict()))
 
@@ -141,7 +144,6 @@ class TestUser_to_dict(unittest.TestCase):
         self.assertEqual(str, type(us_dict["created_at"]))
         self.assertEqual(str, type(us_dict["updated_at"]))
 
-
     def test_to_dict_output(self):
         dt = datetime.today()
         us = User()
@@ -152,7 +154,7 @@ class TestUser_to_dict(unittest.TestCase):
             '__class__': 'User',
             'created_at': dt.isoformat(),
             'updated_at': dt.isoformat()
-            }
+        }
         self.assertDictEqual(us.to_dict(), tdict)
 
     def test_contrast_to_dict_dunder_dict(self):
@@ -163,5 +165,7 @@ class TestUser_to_dict(unittest.TestCase):
         us = User()
         with self.assertRaises(TypeError):
             us.to_dict(1)
+
+
 if __name__ == "__main__":
     unittest.main()

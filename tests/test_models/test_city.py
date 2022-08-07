@@ -88,7 +88,7 @@ class TestCity_save(unittest.TestCase):
     """Unittests for testing save method of the City class."""
 
     @classmethod
-    def setUp(self):
+    def setUp(cls):
         try:
             os.rename("file.json", "tmp")
         except IOError:
@@ -150,9 +150,9 @@ class TestCity_to_dict(unittest.TestCase):
 
     def test_to_dict_contains_added_attributes(self):
         cy = City()
-        cy.middle_name = "Holberton"
+        cy.middle_name = "Alx"
         cy.my_number = 98
-        self.assertEqual("Holberton", cy.middle_name)
+        self.assertEqual("Alx", cy.middle_name)
         self.assertIn("my_number", cy.to_dict())
 
     def test_to_dict_datetime_attributes_are_strs(self):
