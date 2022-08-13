@@ -12,7 +12,6 @@ from models.place import Place
 from models.amenity import Amenity
 from models.review import Review
 
-
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
@@ -22,7 +21,7 @@ def parse(arg):
         else:
             lexer = split(arg[:brackets.span()[0]])
             retl = [i.strip(",") for i in lexer]
-            retl.append(brackets.group())
+            reptl.append(brackets.group())
             return retl
     else:
         lexer = split(arg[:curly_braces.span()[0]])
